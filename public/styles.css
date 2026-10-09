@@ -157,3 +157,25 @@ h1 { margin: 21px 0 22px; font-size: clamp(45px, 5.6vw, 69px); line-height: 1.04
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* Shared navigation and information pages */
+.top-nav { gap: 20px; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; }
+.footer-links a { color: #858da1; text-decoration: none; font-size: 10px; font-weight: 650; }
+.footer-links a:hover { color: var(--purple); }
+.contact-card { max-width: 640px; margin: 0 auto; }
+.contact-card .feature-icon { margin-bottom: 4px; }
+.contact-card h2 { margin-top: 14px; }
+.contact-email { display: inline-flex; align-items: center; justify-content: center; gap: 8px; max-width: 100%; overflow-wrap: anywhere; padding: 13px 18px; border-radius: 11px; background: linear-gradient(105deg, #7568e3, #5e50cf); color: #fff !important; font-size: 13px; font-weight: 750; text-decoration: none; box-shadow: 0 9px 17px rgba(96,79,206,.17); }
+.contact-email:hover { transform: translateY(-1px); box-shadow: 0 12px 21px rgba(96,79,206,.24); }
+.response-time { margin: 20px 0 0 !important; color: #8a92a3 !important; font-size: 11px !important; font-style: italic; }
+.contact-smallprint { max-width: 640px; margin: 18px auto 0; color: #8a92a3; font-size: 11px; line-height: 1.8; }
+@media (max-width: 620px) {
+  .top-nav { gap: 10px 13px; flex-wrap: wrap; justify-content: flex-end; max-width: 230px; }
+  .top-nav a { font-size: 10px; }
+  .site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px 20px; }
+  .footer-links { order: 3; width: 100%; justify-content: flex-start; padding-top: 4px; }
+  .site-footer > span { margin-left: auto; }
+  .site-footer > span:nth-child(2), .site-footer > span:nth-child(3) { grid-row: auto; grid-column: auto; text-align: left; }
+  .contact-email { font-size: 11px; }
+}
