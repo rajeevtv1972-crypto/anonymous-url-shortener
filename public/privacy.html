@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="QuietLink privacy details, link storage, and expiration.">
+  <title>Privacy — QuietLink</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="QuietLink home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M12.8 19.2 9.5 22.5a5 5 0 0 1-7.1-7.1l5-5a5 5 0 0 1 7.1 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="m19.2 12.8 3.3-3.3a5 5 0 0 1 7.1 7.1l-5 5a5 5 0 0 1-7.1 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="m11.5 20.5 9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span>quiet<span class="brand-light">link</span></span></a>
+      <nav class="top-nav" aria-label="Main navigation"><a href="/">Shorten a link</a><a href="#privacy-details">Privacy</a></nav>
+    </header>
+    <main class="legal-page" id="privacy-details">
+      <p class="eyebrow"><span class="status-dot"></span> PRIVACY, IN PLAIN LANGUAGE</p>
+      <h1>Less collected.<br><span class="headline-accent">More clarity.</span></h1>
+      <p class="legal-intro">QuietLink is designed to shorten URLs without accounts, click analytics, or a personal link dashboard. This page explains what the service needs to do its job.</p>
+      <div class="legal-card">
+        <h2>What we store</h2>
+        <p>When you create a short link, QuietLink stores the destination URL and the expiry timestamp (if you choose one). A random code points to that record. We do not require a name, email address, password, or account.</p>
+
+        <h2>What we don't track in the application</h2>
+        <p>QuietLink does not count link clicks, build a per-user link history, set analytics cookies, or load third-party advertising or analytics scripts. The redirect code does not record visitor IP addresses, referrers, or click timestamps.</p>
+
+        <h2>Infrastructure and network information</h2>
+        <p>QuietLink runs on Cloudflare Pages, Functions, and KV. Cloudflare necessarily processes network requests to deliver the service and may handle technical metadata under its own policies and settings. “Privacy-first” does not mean that network traffic is invisible or that the service makes users fully anonymous.</p>
+
+        <h2>Link expiration and deletion</h2>
+        <p>Links can expire after a selected duration or be set to have no expiry. Expiring records are stored with a database TTL and the redirect handler also checks the expiry timestamp before redirecting. Storage systems may take time to complete physical cleanup, but an expired link should no longer redirect.</p>
+        <p>“Never expire” means the link remains until it is removed or the service changes; it is not a promise of permanent availability.</p>
+
+        <h2>Use links carefully</h2>
+        <p>A short URL obscures the original URL in the address you share, but it does not hide the destination from the person who opens it. Only create links you have a right to share. Do not use QuietLink for phishing, malware, impersonation, or unlawful activity. Check destinations before opening unfamiliar links.</p>
+
+        <h2>Changes and contact</h2>
+        <p>This is the initial privacy notice for the project and may be updated as deployment and abuse-prevention settings evolve. For service issues, use the repository's issue tracker on GitHub.</p>
+      </div>
+    </main>
+    <footer class="site-footer"><a class="footer-brand" href="/">quiet<span>link</span></a><span>Less noise. Easier sharing.</span><span>© <span id="year">2026</span> QuietLink</span></footer>
+  </div>
+</body>
+</html>
