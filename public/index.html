@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Create clean, private short links with an expiry you control. No account and no click analytics.">
+  <meta name="referrer" content="no-referrer">
+  <title>QuietLink — Short links, less footprint</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="QuietLink home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M12.8 19.2 9.5 22.5a5 5 0 0 1-7.1-7.1l5-5a5 5 0 0 1 7.1 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="m19.2 12.8 3.3-3.3a5 5 0 0 1 7.1 7.1l-5 5a5 5 0 0 1-7.1 0" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="m11.5 20.5 9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </span>
+        <span>quiet<span class="brand-light">link</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="/privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="status-dot"></span> LINK SHARING, WITH LESS NOISE</div>
+          <h1>Short links.<br><span class="headline-accent">Less footprint.</span></h1>
+          <p class="hero-description">Make a long URL easier to share. No account, no click analytics, and no link history dashboard. You choose when your link expires.</p>
+          <div class="proof-row">
+            <span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No sign-up</span>
+            <span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No click tracking</span>
+            <span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 10 4 4 8-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Expiry you control</span>
+          </div>
+          <div class="quiet-note">
+            <span class="quiet-note-icon" aria-hidden="true">↗</span>
+            <p>Shortening hides a long URL from the share preview; it does not make the destination or your connection fully anonymous. Always check a link before opening it.</p>
+          </div>
+        </div>
+
+        <section class="shortener-card" aria-labelledby="form-title">
+          <div class="card-heading">
+            <div>
+              <div class="card-kicker">CREATE A LINK</div>
+              <h2 id="form-title">Make it shorter</h2>
+            </div>
+            <span class="privacy-pill"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="8.5" width="12" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 8V5.8a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Private by design</span>
+          </div>
+
+          <form id="shorten-form" novalidate>
+            <label for="long-url">Your long URL</label>
+            <div class="url-input-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13.5a4.8 4.8 0 0 0 6.8 0l3-3A4.8 4.8 0 0 0 13 3.7l-1.7 1.7M14 10.5a4.8 4.8 0 0 0-6.8 0l-3 3A4.8 4.8 0 0 0 11 20.3l1.7-1.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input id="long-url" name="url" type="url" inputmode="url" placeholder="https://example.com/your/very/long/link" maxlength="2048" autocomplete="off" autocapitalize="off" spellcheck="false" required aria-describedby="url-help">
+            </div>
+            <p class="field-help" id="url-help">Use a full URL beginning with https:// or http://.</p>
+
+            <div class="expiry-label-row">
+              <label for="expiry">Link expiration</label>
+              <span class="optional-label">YOU'RE IN CONTROL</span>
+            </div>
+            <div class="select-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+              <select id="expiry" name="expiry">
+                <option value="86400">24 hours</option>
+                <option value="3600">1 hour</option>
+                <option value="604800">7 days</option>
+                <option value="2592000">30 days</option>
+                <option value="never">Never expire</option>
+                <option value="custom">Custom duration…</option>
+              </select>
+              <svg class="select-chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div id="custom-expiry" class="custom-expiry" hidden>
+              <label class="sr-only" for="custom-duration">Custom duration</label>
+              <input id="custom-duration" type="number" value="1" min="1" max="365" step="1" inputmode="numeric">
+              <label class="sr-only" for="custom-unit">Duration unit</label>
+              <select id="custom-unit">
+                <option value="hours">hours</option>
+                <option value="days" selected>days</option>
+              </select>
+              <span class="custom-hint">1 hour to 365 days</span>
+            </div>
+
+            <button class="primary-button" id="submit-button" type="submit">
+              <span class="button-label">Create short link</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p id="form-message" class="form-message" role="status" aria-live="polite" hidden></p>
+          </form>
+
+          <section id="result-panel" class="result-panel" aria-live="polite" hidden>
+            <div class="result-topline"><span class="result-check" aria-hidden="true">✓</span><span>YOUR SHORT LINK IS READY</span></div>
+            <div class="result-link-row">
+              <a id="short-url" href="#" target="_blank" rel="noopener noreferrer"></a>
+              <button id="copy-button" class="icon-button" type="button" aria-label="Copy short link" title="Copy short link">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V5a1.5 1.5 0 0 0-1.5-1.5h-9A1.5 1.5 0 0 0 4 5v9a1.5 1.5 0 0 0 1.5 1.5H8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+              </button>
+            </div>
+            <div class="result-footer">
+              <span id="expiry-summary"></span>
+              <button id="share-button" class="text-button" type="button">Share link ↗</button>
+            </div>
+            <p id="copy-message" class="copy-message" role="status" aria-live="polite"></p>
+          </section>
+
+          <div class="card-footnote"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 3.5 5v4.2c0 4 2.7 6.8 6.5 8.3 3.8-1.5 6.5-4.3 6.5-8.3V5L10 2.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m7.2 9.8 1.8 1.8 3.8-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> We don't count clicks or keep a link history for you.</div>
+        </section>
+      </section>
+
+      <section class="how-section" id="how-it-works">
+        <div class="section-heading">
+          <p class="section-kicker">SIMPLE BY DEFAULT</p>
+          <h2>Only what you need.<br><span>Nothing extra.</span></h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon lilac"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13.5a4.8 4.8 0 0 0 6.8 0l3-3A4.8 4.8 0 0 0 13 3.7l-1.7 1.7M14 10.5a4.8 4.8 0 0 0-6.8 0l-3 3A4.8 4.8 0 0 0 11 20.3l1.7-1.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <h3>One quick link</h3>
+            <p>Paste a destination, create a random short code, and share the result. No registration flow in the way.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon mint"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+            <h3>Expiry on your terms</h3>
+            <p>Set a short lifespan for time-sensitive links, choose a custom duration, or keep a link until you no longer need it.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon peach"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.1c0 4.5 3.1 7.5 7.5 9.2 4.4-1.7 7.5-4.7 7.5-9.2V6L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m8.5 12 2.3 2.3 4.8-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Quiet by design</h3>
+            <p>No accounts, no click analytics, and no third-party analytics scripts. Only the destination and expiry needed to make the link work are stored.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="bottom-note">
+        <span class="bottom-note-mark" aria-hidden="true">i</span>
+        <div><strong>A small privacy note</strong><p>QuietLink avoids application-level click tracking and access logs. Cloudflare still processes network requests to deliver the service. A short URL is not a proxy or an anonymity tool.</p></div>
+        <a href="/privacy.html">Read privacy details <span aria-hidden="true">→</span></a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="footer-brand" href="/">quiet<span>link</span></a>
+      <span>Less noise. Easier sharing.</span>
+      <span>© <span id="year"></span> QuietLink</span>
+    </footer>
+  </div>
+</body>
+</html>
