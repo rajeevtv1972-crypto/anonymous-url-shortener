@@ -42,7 +42,7 @@ This provides a local development binding. If you need durable local test data, 
 - `/contact.html` — contact information (`contactussiteinfotechdesk@gmail.com`)
 - `/privacy-policy.html` — full privacy policy
 - `/privacy.html` — legacy path that redirects to the privacy policy
-- `POST /api/shorten` — validate and store a destination mapping
+- `POST /api/shorten` — validate and store a destination mapping (supports cross-origin requests without cookies for integrations such as Life of Lohibv)
 - `/<8-character-code>` — redirect to a saved destination
 
 The `functions/[[path]].js` Pages Function passes static assets through to Pages and handles the API and short-code redirects.
