@@ -121,25 +121,40 @@ export async function onRequest(context) {
   const path = url.pathname;
 
   if (path === "/api/shorten") {
+    // Allow other sites to use QuietLink's public anonymous-shortening API.
+    // No cookies or credentials are used by this endpoint.
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Max-Age": "86400"
+    };
+
+    if (request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: corsHeaders });
+    }
     if (request.method !== "POST") {
-      return json({ error: "Use POST to create a short link." }, 405, { "Allow": "POST" });
+      return json({ error: "Use POST to create a short link." }, 405, {
+        ...corsHeaders,
+        "Allow": "POST, OPTIONS"
+      });
     }
     if (!env.LINKS) {
-      return json({ error: "Link storage isn't connected yet. Bind a Cloudflare KV namespace named LINKS, then redeploy." }, 503);
+      return json({ error: "Link storage isn't connected yet. Bind a Cloudflare KV namespace named LINKS, then redeploy." }, 503, corsHeaders);
     }
 
     let payload;
     try {
       payload = await request.json();
     } catch {
-      return json({ error: "Send a valid JSON request." }, 400);
+      return json({ error: "Send a valid JSON request." }, 400, corsHeaders);
     }
 
     const checkedUrl = validateDestination(payload?.url);
-    if (checkedUrl.error) return json({ error: checkedUrl.error }, 400);
+    if (checkedUrl.error) return json({ error: checkedUrl.error }, 400, corsHeaders);
 
     const expiry = validateExpiry(payload?.expiresInSeconds);
-    if (expiry.error) return json({ error: expiry.error }, 400);
+    if (expiry.error) return json({ error: expiry.error }, 400, corsHeaders);
 
     // No visitor identifier, referrer, click count, or creation timestamp is stored.
     // Only the destination and expiry needed to perform the redirect are persisted.
@@ -160,13 +175,13 @@ export async function onRequest(context) {
       break;
     }
 
-    if (!stored) return json({ error: "We couldn't reserve a short code. Please try again." }, 503);
+    if (!stored) return json({ error: "We couldn't reserve a short code. Please try again." }, 503, corsHeaders);
 
     return json({
       code,
       shortUrl: `${url.origin}/${code}`,
       expiresAt: expiry.expiresAt
-    }, 201);
+    }, 201, corsHeaders);
   }
 
   if (path.startsWith("/api/")) return json({ error: "Not found." }, 404);
