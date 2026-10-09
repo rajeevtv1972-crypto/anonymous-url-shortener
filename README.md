@@ -38,7 +38,10 @@ This provides a local development binding. If you need durable local test data, 
 ## Routes
 
 - `/` — shortener interface
-- `/privacy.html` — privacy notice
+- `/about.html` — about QuietLink
+- `/contact.html` — contact information (`contactussiteinfotechdesk@gmail.com`)
+- `/privacy-policy.html` — full privacy policy
+- `/privacy.html` — legacy path that redirects to the privacy policy
 - `POST /api/shorten` — validate and store a destination mapping
 - `/<8-character-code>` — redirect to a saved destination
 
